@@ -34,3 +34,11 @@ Lucas Dantas Pereira - 118210176
   As declarações globais incluem um canal de broadcast chamado "estado", utilizado para sincronizar o timer com os semáforos para troca de estados. Além disso, há a definição de um clock "time" para controlar o tempo do sistema. Foram utilizadas variáveis inteiras "A", "B", "C" e "D" para indicar o estado de cada semáforo (onde 0 indica verde ou amarelo e 1 indica vermelho).
  
   As variáveis inteiras "aux1", "aux2" e "aux3" são utilizadas para determinar a posição do carro em relação aos semáforos, representando o tempo mínimo necessário para o carro alcançar cada semáforo. Adicionalmente, foram definidas constantes inteiras "verde", "amarelo", "vermelho" e "temp", que indicam a duração de cada estado do semáforo, sendo "temp" utilizado para incrementar o tempo no sistema.
+
+```c
+
+aaa
+
+```
+
+  
