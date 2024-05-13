@@ -7,8 +7,8 @@ Lucas Dantas Pereira - 118210176
 
 ## Vídeo Demonstração
 
-[![Projeto 02 - SED](https://youtu.be/c7zKJGQ76oc)[![sed](https://github.com/douglaspicui1/Projeto02_SED/assets/166778388/f5fc26ab-79cc-464f-85e8-67311e6294a4)](https://www.youtube.com/watch?v=ImpDx60qzqE)
 
+[![Nome do Vídeo](https://img.youtube.com/vi/c7zKJGQ76oc/0.jpg)](https://www.youtube.com/embed/c7zKJGQ76oc)
 
 
 ## Descrição do Problema
