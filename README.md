@@ -37,8 +37,85 @@ Lucas Dantas Pereira - 118210176
 
 ```c
 
-aaa
+// Declarações Globais
+const int N_car=5;
+typedef int [0,N_car-1] id_t;
+
+
+broadcast chan estado;
+clock time;
+int A = 0, B=0, C=0, D=0;
+int aux1=0, aux2=0, aux3=0;
+
+int U[N_car];
+
+const int verde = 30;
+const int amarelo = 5;
+const int vermelho = 20;
+const int temp = 5;
+
 
 ```
 
-  
+Os quatro autômatos dos semáforos possuem uma estrutura similar, variando apenas nos estados iniciais. No caso, os semáforos "A" e "D" começam em verde, enquanto os outros começam em vermelho. Além disso, o valor do clock referente ao estado é atualizado e ocorre a sincronização com o timer por meio do canal utilizando a variável "estado".
+
+![image](https://github.com/douglaspicui1/Projeto02_SED/assets/166778388/73bd2c09-1ec9-4e50-a15e-f45354d2145e)
+
+No autômato do timer, existem duas formas de incremento. Uma delas ocorre a cada cinco unidades de tempo, onde o incremento é realizado e em seguida verifica-se se o valor de "p" é igual a 0 para continuar essa ação. A outra forma é um incremento unitário. 
+
+A função "test(int x)" incrementa o valor de um conjunto de variáveis "U" (usada para identificar um carro) com o valor de "x". Isso é realizado em um loop que percorre de 0 a "N_car". A função "bloqueio()" incrementa o valor de "p" e, se "p" atingir 5, ele é resetado para 0.
+
+![image](https://github.com/douglaspicui1/Projeto02_SED/assets/166778388/7e6d8269-eacd-461d-8fd8-874b0967aece)
+
+```c
+//Declarações do autômato timer
+clock y;
+int i;
+int p=0;
+
+void test(int x)
+{
+    for (i = 0; i < N_car; i++)
+    {
+        U[i] += x;
+    }
+}
+
+void bloqueio()
+{
+    p++;
+    if (p ==5){
+        p=0;
+    }
+}
+```
+
+No autômato "Carro", são definidos seis estados: "Inicio", "Passou_do_Sem1", "Passou_do_Sem2", "Passou_do_Sem3", "Passou_do_Sem4" e "Fim". Cada estado está associado a uma condição de guarda, que considera as distâncias (convertidas para tempo) que o carro leva para chegar a cada semáforo ou ao final do percurso. Além disso, a passagem do carro é liberada apenas quando o semáforo correspondente estiver verde.
+
+![image](https://github.com/douglaspicui1/Projeto02_SED/assets/166778388/64d2cd54-97a2-4409-8996-5cb22f834ef7)
+
+```c
+//Declarações autômato Carro
+clock y;
+
+const int d1 = 108;
+const int d2 = 12; //11.7;
+const int d3 = 15; //14.4;
+const int d4 = 16; //15.3;
+const int d5 = 9; //8.1;
+
+``` 
+
+Listamos um ou mais processos (ou instâncias de autômatos) que são compostos para formar o sistema principal do modelo. Aqui, os processos devem ser listados separados por vírgulas.
+
+```c
+// Place template instantiations here.
+
+
+// List one or more processes to be composed into a system.
+system Carro, SemaforoA, SemafaroB, SemafaroC, SemafaroD, tempo;
+
+```
+
+Os processos listados são "Carro", "SemaforoA", "SemafaroB", "SemafaroC", "SemafaroD" e "tempo", indicando que esses são os autômatos que compõem o sistema principal do modelo.
+
