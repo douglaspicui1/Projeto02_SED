@@ -33,7 +33,7 @@ Lucas Dantas Pereira - 118210176
   
   As declarações globais incluem um canal de broadcast chamado "estado", utilizado para sincronizar o timer com os semáforos para troca de estados. Além disso, há a definição de um clock "time" para controlar o tempo do sistema. Foram utilizadas variáveis inteiras "A", "B", "C" e "D" para indicar o estado de cada semáforo (onde 0 indica verde ou amarelo e 1 indica vermelho).
  
-  As variáveis inteiras "aux1", "aux2" e "aux3" são utilizadas para determinar a posição do carro em relação aos semáforos, representando o tempo mínimo necessário para o carro alcançar cada semáforo. Adicionalmente, foram definidas constantes inteiras "verde", "amarelo", "vermelho" e "temp", que indicam a duração de cada estado do semáforo, sendo "temp" utilizado para incrementar o tempo no sistema.
+  O vetor U[N_car] é utilizado para determinar a posição do carro em relação aos semáforos, representando o tempo mínimo necessário para o carro alcançar cada semáforo. Adicionalmente, foram definidas constantes inteiras "verde", "amarelo", "vermelho" e "temp", que indicam a duração de cada estado do semáforo, sendo  a constante "temp" utilizado para incrementar o tempo no sistema.
 
 ```c
 
@@ -45,7 +45,6 @@ typedef int [0,N_car-1] id_t;
 broadcast chan estado;
 clock time;
 int A = 0, B=0, C=0, D=0;
-int aux1=0, aux2=0, aux3=0;
 
 int U[N_car];
 
@@ -61,9 +60,9 @@ Os quatro autômatos dos semáforos possuem uma estrutura similar, variando apen
 
 ![image](https://github.com/douglaspicui1/Projeto02_SED/assets/166778388/73bd2c09-1ec9-4e50-a15e-f45354d2145e)
 
-No autômato do timer, existem duas formas de incremento. Uma delas ocorre a cada cinco unidades de tempo, onde o incremento é realizado e em seguida verifica-se se o valor de "p" é igual a 0 para continuar essa ação. A outra forma é um incremento unitário. 
+No autômato do timer, existem duas formas de incremento. Uma delas ocorre a cada cinco unidades de tempo representados pela contante "temp", onde o incremento é realizado e em seguida verifica-se se o valor de "p" é igual a 0 para continuar essa ação. A outra forma é um incremento unitário, no qual se o usuário utilizar essa opção ele deve incrementar 5 unidades unitárias de tempo em sequência para garantir o funcionamento correto dos semafaros e isso é controlado pela função Bloqueio(), que não permite que seja incrementado cinco unidades de tempo antes que as 5 unidades unitárias sejam finalizadas. Esse método utilizado para incrementar o tempo permite que o usuário tenha um maior controle do momento que o carro irar atravessar o semáfaro, podendo ser qualquer número inteiro, contanto que o tempo mínimo para o carro chegar no semáfaro tenha sido satisfeito.
 
-A função "test(int x)" incrementa o valor de um conjunto de variáveis "U" (usada para identificar um carro) com o valor de "x". Isso é realizado em um loop que percorre de 0 a "N_car". A função "bloqueio()" incrementa o valor de "p" e, se "p" atingir 5, ele é resetado para 0.
+A função "test(int x)" incrementa o valor de tempo passado, para o vetor U[N_car] no qual o argumento x é o tempo escolhido, podendo ser 5 ou 1, e esse valor é incrementado em todos os carros . Isso é realizado em um loop que percorre de 0 a "N_car". A função "bloqueio()" incrementa o valor de "p" e, se "p" atingir 5, ele é resetado para 0.
 
 ![image](https://github.com/douglaspicui1/Projeto02_SED/assets/166778388/7e6d8269-eacd-461d-8fd8-874b0967aece)
 
