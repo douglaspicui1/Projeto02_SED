@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+const int N_car=5;
+typedef int [0,N_car-1] id_t;
+
+
+broadcast chan estado;
+clock time;
+int A = 0, B=0, C=0, D=0;
+
+int U[N_car];
+
+const int verde = 30;
+const int amarelo = 5;
+const int vermelho = 20;
+const int temp = 5;
+
+
+
+</declaration>
+	<template>
+		<name x="5" y="5">SemaforoA</name>
+		<declaration>// Place local declarations here.
+
+
+
+clock y;
+
+</declaration>
+		<location id="id0" x="-1649" y="-569">
+			<name x="-1659" y="-603">Verde</name>
+		</location>
+		<location id="id1" x="-1462" y="-569">
+			<name x="-1472" y="-603">Amarelo</name>
+		</location>
+		<location id="id2" x="-1292" y="-569">
+			<name x="-1302" y="-603">Vermelho</name>
+		</location>
+		<init ref="id0"/>
+		<transition id="id3">
+			<source ref="id2"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-1487" y="-493">y&gt;=vermelho</label>
+			<label kind="synchronisation" x="-1479" y="-518">estado ?</label>
+			<label kind="assignment" x="-1470" y="-459">A=0, y = 0</label>
+			<nail x="-1385" y="-467"/>
+			<nail x="-1453" y="-467"/>
+			<nail x="-1555" y="-467"/>
+		</transition>
+		<transition id="id4">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-1419" y="-595">y&gt;=amarelo</label>
+			<label kind="synchronisation" x="-1402" y="-620">estado ?</label>
+			<label kind="assignment" x="-1402" y="-569">A = 1,
+y = 0</label>
+			<nail x="-1368" y="-569"/>
+		</transition>
+		<transition id="id5">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-1606" y="-603">y &gt;= verde</label>
+			<label kind="synchronisation" x="-1598" y="-620">estado ?</label>
+			<label kind="assignment" x="-1606" y="-569">y = 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>SemafaroB</name>
+		<declaration>clock y=10;</declaration>
+		<location id="id6" x="24" y="39">
+			<name x="14" y="5">Verde</name>
+		</location>
+		<location id="id7" x="211" y="39">
+			<name x="201" y="5">Amarelo</name>
+		</location>
+		<location id="id8" x="381" y="39">
+			<name x="371" y="5">Vermelho</name>
+		</location>
+		<init ref="id8"/>
+		<transition id="id9">
+			<source ref="id8"/>
+			<target ref="id6"/>
+			<label kind="guard" x="186" y="115">y&gt;=vermelho</label>
+			<label kind="synchronisation" x="194" y="90">estado ?</label>
+			<label kind="assignment" x="203" y="149">B=0, y = 0</label>
+			<nail x="288" y="141"/>
+			<nail x="220" y="141"/>
+			<nail x="118" y="141"/>
+		</transition>
+		<transition id="id10">
+			<source ref="id7"/>
+			<target ref="id8"/>
+			<label kind="guard" x="254" y="13">y&gt;=amarelo</label>
+			<label kind="synchronisation" x="271" y="-12">estado ?</label>
+			<label kind="assignment" x="272" y="42">B = 1,
+y = 0</label>
+			<nail x="305" y="39"/>
+		</transition>
+		<transition id="id11">
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="guard" x="68" y="8">y &gt;= verde</label>
+			<label kind="synchronisation" x="75" y="-12">estado ?</label>
+			<label kind="assignment" x="76" y="42">y = 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>SemafaroC</name>
+		<declaration>clock y;</declaration>
+		<location id="id12" x="-1232" y="-374">
+			<name x="-1242" y="-408">Verde</name>
+		</location>
+		<location id="id13" x="-1045" y="-374">
+			<name x="-1055" y="-408">Amarelo</name>
+		</location>
+		<location id="id14" x="-875" y="-374">
+			<name x="-885" y="-408">Vermelho</name>
+		</location>
+		<init ref="id14"/>
+		<transition id="id15">
+			<source ref="id14"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-1070" y="-298">y&gt;=vermelho</label>
+			<label kind="synchronisation" x="-1062" y="-323">estado ?</label>
+			<label kind="assignment" x="-1053" y="-264">C=0, y = 0</label>
+			<nail x="-968" y="-272"/>
+			<nail x="-1036" y="-272"/>
+			<nail x="-1138" y="-272"/>
+		</transition>
+		<transition id="id16">
+			<source ref="id13"/>
+			<target ref="id14"/>
+			<label kind="guard" x="-1002" y="-400">y&gt;=amarelo</label>
+			<label kind="synchronisation" x="-985" y="-425">estado ?</label>
+			<label kind="assignment" x="-985" y="-374">C = 1,
+y = 0</label>
+			<nail x="-951" y="-374"/>
+		</transition>
+		<transition id="id17">
+			<source ref="id12"/>
+			<target ref="id13"/>
+			<label kind="guard" x="-1190" y="-408">y &gt;= verde</label>
+			<label kind="synchronisation" x="-1181" y="-425">estado ?</label>
+			<label kind="assignment" x="-1214" y="-374">y = 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>SemafaroD</name>
+		<declaration>clock y=25;</declaration>
+		<location id="id18" x="-875" y="-178">
+			<name x="-885" y="-212">Verde</name>
+		</location>
+		<location id="id19" x="-688" y="-178">
+			<name x="-698" y="-212">Amarelo</name>
+		</location>
+		<location id="id20" x="-518" y="-178">
+			<name x="-528" y="-212">Vermelho</name>
+		</location>
+		<init ref="id18"/>
+		<transition id="id21">
+			<source ref="id20"/>
+			<target ref="id18"/>
+			<label kind="guard" x="-713" y="-102">y&gt;=vermelho</label>
+			<label kind="synchronisation" x="-705" y="-127">estado ?</label>
+			<label kind="assignment" x="-696" y="-68">D=0, y = 0</label>
+			<nail x="-611" y="-76"/>
+			<nail x="-679" y="-76"/>
+			<nail x="-781" y="-76"/>
+		</transition>
+		<transition id="id22">
+			<source ref="id19"/>
+			<target ref="id20"/>
+			<label kind="guard" x="-645" y="-204">y&gt;=amarelo</label>
+			<label kind="synchronisation" x="-628" y="-229">estado ?</label>
+			<label kind="assignment" x="-628" y="-178">D = 1,
+y = 0</label>
+			<nail x="-594" y="-178"/>
+		</transition>
+		<transition id="id23">
+			<source ref="id18"/>
+			<target ref="id19"/>
+			<label kind="guard" x="-833" y="-212">y &gt;= verde</label>
+			<label kind="synchronisation" x="-824" y="-229">estado ?</label>
+			<label kind="assignment" x="-857" y="-178">y = 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>tempo</name>
+		<declaration>clock y;
+int i;
+int p=0;
+
+void test(int x)
+{
+    for (i = 0; i &lt; N_car; i++)
+    {
+        U[i] += x;
+    }
+}
+
+void bloqueio()
+{
+    p++;
+    if (p ==5){
+        p=0;
+    }
+}</declaration>
+		<location id="id24" x="-1496" y="-943">
+		</location>
+		<init ref="id24"/>
+		<transition id="id25">
+			<source ref="id24"/>
+			<target ref="id24"/>
+			<label kind="guard" x="-1428" y="-960">y==1</label>
+			<label kind="synchronisation" x="-1436" y="-943">estado !</label>
+			<label kind="assignment" x="-1419" y="-926">y=0, test(1), bloqueio()</label>
+			<nail x="-1402" y="-892"/>
+			<nail x="-1453" y="-858"/>
+		</transition>
+		<transition id="id26">
+			<source ref="id24"/>
+			<target ref="id24"/>
+			<label kind="guard" x="-1504" y="-1045">y == temp &amp;&amp; p==0</label>
+			<label kind="synchronisation" x="-1509" y="-1024">estado !</label>
+			<label kind="assignment" x="-1496" y="-1003">y = 0, test(5)</label>
+			<nail x="-1522" y="-1071"/>
+			<nail x="-1556" y="-1012"/>
+		</transition>
+	</template>
+	<template>
+		<name>Carro</name>
+		<parameter>const id_t id</parameter>
+		<declaration>clock y;
+
+const int d1 = 108;
+const int d2 = 12; //11.7;
+const int d3 = 15; //14.4;
+const int d4 = 16; //15.3;
+const int d5 = 9; //8.1;
+</declaration>
+		<location id="id27" x="-969" y="-195">
+			<name x="-979" y="-229">Inicio</name>
+			<label kind="exponentialrate" x="-969" y="-161">(id+1):N_car*N_car</label>
+		</location>
+		<location id="id28" x="-663" y="-195">
+			<name x="-714" y="-229">Passou_do_Sem1</name>
+		</location>
+		<location id="id29" x="-382" y="-195">
+			<name x="-441" y="-229">Passou_do_Sem2</name>
+		</location>
+		<location id="id30" x="552" y="-204">
+			<name x="542" y="-238">Fim</name>
+		</location>
+		<location id="id31" x="238" y="-195">
+			<name x="179" y="-229">Passou_do_Sem4</name>
+		</location>
+		<location id="id32" x="-76" y="-195">
+			<name x="-127" y="-229">Passou_do_Sem3</name>
+		</location>
+		<init ref="id27"/>
+		<transition id="id33">
+			<source ref="id30"/>
+			<target ref="id27"/>
+			<label kind="assignment" x="-960" y="-127">U[id] = 0</label>
+			<nail x="552" y="-144"/>
+			<nail x="-969" y="-136"/>
+		</transition>
+		<transition id="id34">
+			<source ref="id32"/>
+			<target ref="id31"/>
+			<label kind="guard" x="-17" y="-263">U[id] &gt;= d4 &amp;&amp; D==0</label>
+			<label kind="assignment" x="-58" y="-195">U[id] = 0</label>
+		</transition>
+		<transition id="id35">
+			<source ref="id29"/>
+			<target ref="id32"/>
+			<label kind="guard" x="-297" y="-289">U[id] &gt;= d3 &amp;&amp; C==0</label>
+			<label kind="assignment" x="-364" y="-195">U[id] = 0</label>
+		</transition>
+		<transition id="id36">
+			<source ref="id31"/>
+			<target ref="id30"/>
+			<label kind="guard" x="340" y="-263">U[id] &gt;= d5</label>
+			<label kind="assignment" x="256" y="-195">U[id] = 0</label>
+		</transition>
+		<transition id="id37">
+			<source ref="id28"/>
+			<target ref="id29"/>
+			<label kind="guard" x="-586" y="-289">U[id] &gt;= d2 &amp;&amp; B==0</label>
+			<label kind="assignment" x="-645" y="-195">U[id] = 0</label>
+		</transition>
+		<transition id="id38">
+			<source ref="id27"/>
+			<target ref="id28"/>
+			<label kind="guard" x="-892" y="-289">U[id] &gt;= d1 &amp;&amp; A==0</label>
+			<label kind="assignment" x="-799" y="-195">U[id] = 0</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+
+
+
+
+
+sem_1 = SemaforoA();
+sem_2 = SemafaroB();
+sem_3 = SemafaroC();
+sem_4 = SemafaroD();
+timer = tempo();
+
+// List one or more processes to be composed into a system.
+system Carro, sem_1, sem_2, sem_3, sem_4, timer;
+</system>
+	<queries>
+		<query>
+			<formula>A[] (aux1 == 115 and A == 0)
+</formula>
+			<comment/>
+			<result outcome="failure" type="quality" timestamp="2024-05-09 18:07:56 -0300">
+			</result>
+		</query>
+	</queries>
+</nta>
